@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29025.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsHotReloading", "FsHotReloading.fsproj", "{4A15B318-3623-4BD0-B0F1-21DE3558BCE3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A15B318-3623-4BD0-B0F1-21DE3558BCE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A15B318-3623-4BD0-B0F1-21DE3558BCE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A15B318-3623-4BD0-B0F1-21DE3558BCE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A15B318-3623-4BD0-B0F1-21DE3558BCE3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F0AE117-96B4-4A34-8502-8248BEBA7C2B}
+	EndGlobalSection
+EndGlobal
