@@ -1,6 +1,8 @@
 # FsHotReloading
 **An experimental library that provides hot reloading to any F# app for any purpose.**
 
+![Demo](demo.gif)
+
 ## Core Concepts
 * FsHotReloading is built around the concept of global *registries*. For each kind of value that should be hot-reloadable, declare a registry. The sample app declares a single `StringRegistry` for hot-reloadable `string` values.
 * Each registry has its own way of identifying registered values. The `StringRegistry` in the sample app uses the type `StringId` as identifier which is simply a pair of a file path and a name. Whatever you choose as identifer, the file path *must* be part of it so that the system knows which files to watch for changes.
