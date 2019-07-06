@@ -20,7 +20,7 @@ module KeyValuePair =
     let key (kvp: KeyValuePair<'key, 't>) = kvp.Key
     let value (kvp: KeyValuePair<'key, 't>) = kvp.Value
 
-module ImDictionary =
+module ImmutableDictionary =
     [<GeneralizableValue>]
     let empty<'k, 'v> = ImmutableDictionary<'k, 'v>.Empty
 
@@ -52,7 +52,7 @@ module Dictionary =
     let filter predicate (dict: IEnumerable<KeyValuePair<'k, 'v>>) =
         dict
         |> Seq.filter (fun o -> predicate o.Key o.Value)
-        |> ImDictionary.ofSeq
+        |> ImmutableDictionary.ofSeq
 
     let fold folder state =
         Seq.fold (fun state (o: KeyValuePair<'k, 'v>) -> folder state o.Key o.Value) state
@@ -65,8 +65,8 @@ module Dictionary =
         let get flag =
             groups
             |> Map.tryFind flag
-            |> Option.map ImDictionary.ofTupleSeq
-            |> Option.defaultValue ImDictionary.empty
+            |> Option.map ImmutableDictionary.ofTupleSeq
+            |> Option.defaultValue ImmutableDictionary.empty
         get true, get false
 
 module Map =
