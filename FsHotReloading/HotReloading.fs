@@ -275,14 +275,15 @@ module HotReloading =
 
     let private getValue ops id =
         let id = ValueId.box ops.registryId id
-        match mailbox with
-        | Some mailbox -> mailbox.PostAndReply (fun chan -> ReadValue (ops, id, chan))
-        | None -> ops.tryFind id
+        match mailbox, context with
+        | Some mailbox, NormalContext -> mailbox.PostAndReply (fun chan -> ReadValue (ops, id, chan))
+        | Some _, FsiContext _ -> ops.tryFind id
+        | None, _ -> ops.tryFind id
         |> Option.map fst
     
     let createRegistry<'key, 'state, 'result> registryId
         (getFileFromKey: 'key -> string)
-        (tryGet: 'key -> ('state * 'result) option)
+        (tryFind: 'key -> ('state * 'result) option)
         (getAllKeys: unit -> 'key seq)
         (allocate: 'key -> 'state -> 'result -> unit)
         (update: 'key -> 'state -> unit)
@@ -293,7 +294,7 @@ module HotReloading =
             {
                 registryId = registryId
                 getFileFromKey = ValueId.unbox >> getFileFromKey
-                tryFind = ValueId.unbox >> tryGet >> Option.map (fun (state, result) -> unbox state, unbox result)
+                tryFind = ValueId.unbox >> tryFind >> Option.map (fun (state, result) -> unbox state, unbox result)
                 getAllKeys = getAllKeys >> Seq.map (ValueId.box registryId)
                 allocate = fun key state result -> allocate (ValueId.unbox key) (unbox state) (unbox result)
                 update = fun key state -> update (ValueId.unbox key) (unbox state)
